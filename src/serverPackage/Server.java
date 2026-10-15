@@ -1,30 +1,24 @@
 package serverPackage;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-    public static void main(String[] args)
-            throws IOException {
-// 1. Créer la socket d'écoute sur le port 1234
-        ServerSocket socketServeur = new ServerSocket(1234);
-        System.out.println("Le serveur attend un client...");
-// 3. Attendre puis accepter la connexion d'un client
-        Socket socket = socketServeur.accept();
-        System.out.println("Un client est connecté");
-// 4. Lire la requête envoyée par le client
-        InputStream is = socket.getInputStream();
-        int nb = is.read();
-// 5. Traiter, puis envoyer la réponse
-        int x = nb * 3;
-        OutputStream os = socket.getOutputStream();
-        os.write(x);
-// 6. Fermer les sockets
-        socket.close();
-        socketServeur.close();
-    }
+    public static void main(String[] args) {
+        try {
+            // Étape 1
+            ServerSocket serverSocket = new ServerSocket(1234);
+            IO.println("Je suis un serveur en attente la connexion d'un client ");
 
+            // Étape 2
+            Socket socket = serverSocket.accept();
+            IO.println("un client est connecté");
+
+            // Étape 3
+            socket.close();
+            serverSocket.close();
+        } catch (IOException _) {
+        }
+    }
 }
